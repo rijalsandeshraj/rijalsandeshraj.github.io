@@ -48,17 +48,20 @@ so nothing 404s out of the box. Swap them for the real links when convenient:
 
 ## Contact form
 
-Out of the box the form validates input and then opens the visitor's mail client
-(`mailto:`), so it works on any static host with no backend.
+Submissions go to **Formspree** (`https://formspree.io/f/xvkgwvkr`), configured in
+`lib/data.js`. Notification emails arrive with the subject
+`Portfolio enquiry — <whatever the sender typed>`.
 
-To receive submissions as real email instead, create a free form at
-[formspree.io](https://formspree.io) and add to `.env.local`:
+The endpoint is deliberately committed rather than stored as a build secret: any
+`NEXT_PUBLIC_*` value is inlined into the client bundle, so a secret would add
+indirection without adding secrecy. Anyone can read it from the deployed JS either way.
 
-```bash
-NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/xxxxxxx
-```
+To point at a different form (a test one, say) set `NEXT_PUBLIC_FORMSPREE_ENDPOINT` in
+`.env.local` — it takes precedence. Blank the endpoint entirely and the form falls back
+to opening the visitor's mail client.
 
-See `.env.example`.
+**Free tier is 50 submissions/month.** Past that, Formspree holds them until the next
+cycle or an upgrade.
 
 ---
 

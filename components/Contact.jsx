@@ -15,14 +15,11 @@ import {
 } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 import Reveal from './Reveal';
-import { profile } from '@/lib/data';
+import { profile, formspreeEndpoint } from '@/lib/data';
 
-/**
- * Set NEXT_PUBLIC_FORMSPREE_ENDPOINT in .env.local to receive submissions
- * (e.g. https://formspree.io/f/xxxxxxx). Without it the form falls back to
- * opening the visitor's mail client — so it still works on a static host.
- */
-const FORMSPREE = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+// Submissions go to Formspree; see lib/data.js. If the endpoint is ever blanked out,
+// the handler below falls back to opening the visitor's mail client.
+const FORMSPREE = formspreeEndpoint;
 
 const contactDetails = [
   { icon: MapPin, label: 'Location', value: profile.location, href: null },
@@ -77,9 +74,20 @@ export default function Contact() {
       const res = await fetch(FORMSPREE, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          // `_subject` sets the subject line of the notification email Formspree sends,
+          // so enquiries are scannable in the inbox instead of all reading the same.
+          _subject: `Portfolio enquiry — ${form.subject}`,
+        }),
       });
-      if (!res.ok) throw new Error('Request failed');
+
+      if (!res.ok) {
+        // Formspree reports problems as { errors: [{ message }] }
+        const detail = await res.json().catch(() => null);
+        throw new Error(detail?.errors?.[0]?.message || `HTTP ${res.status}`);
+      }
+
       setStatus('sent');
       setForm(emptyForm);
     } catch {
