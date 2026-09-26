@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Profile photo placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1219"/>
+      <stop offset="55%" stop-color="#0a1016"/>
+      <stop offset="100%" stop-color="#060a0f"/>
+    </linearGradient>
+    <radialGradient id="bloom" cx="50%" cy="34%" r="58%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e2f6fb"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#bloom)"/>
+
+  <!-- shoulders / bust silhouette -->
+  <g fill="#161f2b" opacity="0.9">
+    <circle cx="300" cy="238" r="86"/>
+    <path d="M300 340c-92 0-166 58-166 130v50h332v-50c0-72-74-130-166-130z"/>
+  </g>
+
+  <text x="300" y="322" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+        font-size="120" font-weight="700" letter-spacing="6"
+        fill="url(#ink)" text-anchor="middle" opacity="0.92">SR</text>
+
+  <text x="300" y="400" font-family="system-ui, -apple-system, Segoe UI, sans-serif"
+        font-size="21" letter-spacing="3" fill="#64748b" text-anchor="middle">
+    ADD YOUR HEADSHOT
+  </text>
+  <text x="300" y="432" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+        font-size="16" letter-spacing="1" fill="#3f4c5c" text-anchor="middle">
+    public/profile.jpg
+  </text>
+</svg>

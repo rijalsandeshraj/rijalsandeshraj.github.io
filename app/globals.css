@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #05070a;
+    --accent: 34 211 238;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* keeps anchored sections clear of the sticky navbar */
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    @apply bg-obsidian-950 text-slate-300 antialiased;
+    background-image:
+      radial-gradient(60rem 40rem at 50% -10%, rgba(34, 211, 238, 0.07), transparent 65%),
+      radial-gradient(50rem 30rem at 100% 20%, rgba(59, 130, 246, 0.05), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-white;
+  }
+
+  h1, h2, h3, h4 {
+    @apply text-white tracking-tight;
+  }
+
+  /* Dark, slim scrollbar so the chrome matches the theme */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #05070a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1d2733;
+    border-radius: 9999px;
+    border: 2px solid #05070a;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2b3a4a;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  /* Glassmorphism card base used across sections */
+  .glass {
+    @apply rounded-2xl border border-white/[0.07] bg-white/[0.025] backdrop-blur-xl shadow-card;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:border-accent/30 hover:bg-white/[0.045] hover:shadow-glow;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-slate-300 transition-colors duration-200;
+  }
+
+  .badge-accent {
+    @apply border-accent/25 bg-accent/10 text-accent-soft;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.25em] text-accent;
+  }
+
+  .link-underline {
+    @apply relative text-slate-400 transition-colors duration-200 hover:text-white;
+  }
+
+  /* Thin gradient rule used under section headings */
+  .rule {
+    @apply h-px w-full bg-gradient-to-r from-accent/40 via-white/10 to-transparent;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-white via-cyan-100 to-cyan-300 bg-clip-text text-transparent;
+  }
+
+  /* Faint engineering-grid backdrop for the hero */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.055) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+  }
+}
+
+/* Respect users who prefer reduced motion: kill the ambient loops. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-spin-slow,
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-shimmer {
+    animation: none !important;
+  }
+}
