@@ -31,9 +31,9 @@ jobs:
       - name: Static build
         env:
           GITHUB_PAGES: 'true'
-          # Project page (username.github.io/<repo>) needs the repo name as basePath.
-          # For a user page (username.github.io) delete the line below.
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          # This is a USER page (rijalsandeshraj.github.io), served from the domain
+          # root, so no basePath. If you ever move this to a project page, set:
+          #   NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
         run: npx next build
 
       - name: Disable Jekyll processing

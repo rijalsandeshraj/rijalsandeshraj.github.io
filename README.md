@@ -80,19 +80,19 @@ Every later `git push` redeploys automatically.
 
 **Custom domain:** *Settings → Domains* → add your domain → point the DNS records it shows you.
 
-### Option B — GitHub Pages (free, static)
+### Option B — GitHub Pages (this repo's current setup)
 
-`.github/workflows/deploy.yml` is already committed and does the whole build.
+`.github/workflows/deploy.yml` is committed and does the whole build.
 
-1. Push the repo to GitHub.
+1. Push to GitHub as `rijalsandeshraj.github.io` (public).
 2. *Settings → Pages → Build and deployment → Source:* **GitHub Actions**.
-3. Push to `main`. The workflow builds a static export and publishes it.
+3. Push to `main`. The workflow static-exports the site and publishes it.
 
-Live at `https://rijalsandeshraj.github.io/<repo-name>/`.
+Live at **<https://rijalsandeshraj.github.io>**.
 
-> **Repo named `rijalsandeshraj.github.io`?** That's a *user page* served from the domain
-> root, so remove the `NEXT_PUBLIC_BASE_PATH` line from `.github/workflows/deploy.yml` —
-> otherwise every asset path gets a prefix it doesn't need.
+> This is a **user page**, served from the domain root, so the build runs with no
+> `basePath`. If you ever move it to a project page (`/<repo-name>/`), uncomment the
+> `NEXT_PUBLIC_BASE_PATH` line in the workflow — otherwise every asset 404s.
 
 ---
 
